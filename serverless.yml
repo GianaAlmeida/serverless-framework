@@ -1,9 +1,40 @@
-service: serverless-framework
+service: testing-serverless-framework
 
 provider:
   name: aws
   runtime: python3.8
 
+  environment:
+    DYNAMODB_TABLE: !Ref table
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+      Resource:
+        - !GetAtt table.Arn
+
 functions:
   hello:
     handler: handler.hello
+    events:
+      - sns: topic
+
+    environment:
+      DYNAMODB_TABLE: !Ref table
+
+resources:
+  Resources:
+    table:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: table
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
