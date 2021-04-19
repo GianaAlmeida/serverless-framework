@@ -1,16 +1,17 @@
-import json
+import os
+import uuid
+import boto3
+
+DYNAMODB_TABLE = os.environ['DYNAMODB_TABLE']
+
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table(DYNAMODB_TABLE)
 
 
 def hello(event, context):
-    body = {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "input": event
+    item = {
+        'id': str(uuid.uuid4()),
+        'message': event
     }
-
-    response = {
-        "statusCode": 200,
-        "body": json.dumps(body)
-    }
-
-    return response
-
+    return table.put_item(Item=item)
