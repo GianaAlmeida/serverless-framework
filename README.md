@@ -28,3 +28,14 @@ Para executar o deploy e acompanhar os logs do mesmo basta usar o seguinte coman
 ```bash
 $ serverless deploy --verbose
 ```
+
+# Test
+
+Para testar basta publicar uma nova mensagem no tópico SNS:
+```bash
+$ aws sns publish --topic-arn arn:aws:sns:sa-east-1:BIG_NUMBER:topic --message ":)" --region "sa-east-1" 
+
+{
+    "MessageId": "ccb5ed15-a8a0-5777-aba5-b5ed89b14657"
+}
+```
