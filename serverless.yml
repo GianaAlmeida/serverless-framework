@@ -20,9 +20,19 @@ provider:
       Resource:
         - !GetAtt table.Arn
 
+
+package:
+  include:
+    - '!./**'
+    - './handler.py'
+  exclude:
+    - '**'
+
+
 functions:
   hello:
     handler: handler.hello
+    description: 'Função lambda que monitora um tópico SNS. Quando este recebe uma mensagem, a função a armazena em um banco de dados'
     events:
       - sns: topic
 
