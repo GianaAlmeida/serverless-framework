@@ -10,6 +10,11 @@ provider:
 
   logRetentionInDays: 3
   deploymentBucket: serverless-framework-deployment-bucket-${opt:stage, self:provider.stage}
+  
+  stackTags:
+    script: "cloudformation"
+    project: "save-msgs"
+    github: "gianaalmeida/serverless-framework"
 
   environment:
     DYNAMODB_TABLE: !Ref table
