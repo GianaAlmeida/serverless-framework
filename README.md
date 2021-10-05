@@ -7,9 +7,10 @@ $ curl -o- -L https://slss.io/install | bash
 
 Crie um projeto a partir de um template
 ```bash
-$ mkdir projeto/
-$ cd projeto/
-$ serverless create --template aws-python3
+mkdir projeto/
+cd projeto/
+
+serverless create --template aws-python3
 ```
 
 A estrutura ficará assim:
@@ -26,7 +27,7 @@ Obs: Aqui estamos criando um projeto em python por ser uma linguagem que eu gost
 
 Para executar o deploy e acompanhar os logs do mesmo basta usar o seguinte comando: 
 ```bash
-$ serverless deploy --verbose
+serverless deploy --verbose --stage dev
 ```
 
 # Test
