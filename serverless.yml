@@ -22,11 +22,8 @@ provider:
 
 
 package:
-  include:
-    - '!./**'
-    - './handler.py'
-  exclude:
-    - '**'
+  patterns:
+    - handler.py
 
 
 functions:
