@@ -3,12 +3,18 @@ service: testing-serverless-framework
 provider:
   name: aws
   runtime: python3.8
+  lambdaHashingVersion: 20201221
 
-  stage: ${opt:stage, self:provider.stage'}
+  stage: ${opt:stage, self:provider.stage}
   region: ${opt:region, 'sa-east-1'}
 
   logRetentionInDays: 3
   deploymentBucket: serverless-framework-deployment-bucket-${opt:stage, self:provider.stage}
+  
+  stackTags:
+    script: "cloudformation"
+    project: "save-msgs"
+    github: "gianaalmeida/serverless-framework"
 
   environment:
     DYNAMODB_TABLE: !Ref table
@@ -22,11 +28,8 @@ provider:
 
 
 package:
-  include:
-    - '!./**'
-    - './handler.py'
-  exclude:
-    - '**'
+  patterns:
+    - handler.py
 
 
 functions:
