@@ -3,8 +3,9 @@ service: testing-serverless-framework
 provider:
   name: aws
   runtime: python3.8
+  lambdaHashingVersion: 20201221
 
-  stage: ${opt:stage, self:provider.stage'}
+  stage: ${opt:stage, self:provider.stage}
   region: ${opt:region, 'sa-east-1'}
 
   logRetentionInDays: 3
